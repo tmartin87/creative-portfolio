@@ -64,3 +64,10 @@ React, TypeScript, Vite, React Three Fiber, Three.js y GSAP.
 
 \- Las skills deben respetar esta forma de colaboración.
 
+
+## Ramas de Git
+- Antes de empezar una nueva funcionalidad o corrección, comprobar la rama y los cambios pendientes.
+- Crear o seleccionar una rama específica antes de modificar código; no desarrollar nuevas funcionalidades directamente en main.
+- Usar nombres descriptivos en inglés, por ejemplo feat/animated-core o fix/camera-transition.
+- No cambiar de rama con trabajo pendiente sin explicar cómo conservarlo.
+- Seguir guiando al usuario paso a paso; no crear ramas, commits, merges ni subir cambios por cuenta propia sin petición explícita.
