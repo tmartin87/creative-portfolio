@@ -27,6 +27,10 @@ export default function Experience() {
 
   return (
     <div style={{ width: "100%", height: "70vh" }}>
+        <section aria-live="polite" aria-atomic="true">
+  <h2>{destinations[destinationIndex].title}</h2>
+  <p>{destinations[destinationIndex].description}</p>
+</section>
       <nav aria-label="Destinos del portfolio">
         {destinations.map((destination, index) => (
           <button
