@@ -1,6 +1,6 @@
 # Memoria del proyecto
 
-Última actualización: 18 de noviembre de 2026.
+Última actualización: 20 de noviembre de 2026.
 
 ## Objetivo
 Crear un portfolio Creative Developer con estética Tech & Immersive y navegación WebGL experimental. El portfolio debe mostrar trabajo real y demostrar capacidades de desarrollo creativo y motion.
@@ -44,11 +44,14 @@ Dependencias declaradas en package.json (rangos, no garantía de versión instal
 Archivos comprobados el 18/11/2026:
 - index.html: en la raíz, idioma es, metadatos iniciales, contenedor root y entrada /src/main.tsx.
 - src/main.tsx: monta App dentro de StrictMode y comprueba que existe root.
-- src/App.tsx: muestra el título Creative Developer y un párrafo inicial. Aún no contiene Canvas ni escena 3D.
+- src/App.tsx: muestra el título, un párrafo inicial y el componente Experience con la escena 3D.
 - vite.config.ts, tsconfig.json, package.json y package-lock.json.
 - .gitignore, README.md, AGENTS.MD y MEMORY.MD.
 - Carpetas creadas inicialmente: src/components, src/experience, src/hooks y src/data. Las carpetas vacías no se guardan en Git.
-- No hay todavía estilos propios, shaders, animaciones, navegación, contenido real de proyectos ni skills propias implementadas.
+- src/experience/Experience.tsx: Canvas, fondo oscuro, luces y Core. Consulta prefers-reduced-motion y escucha sus cambios; utiliza frameloop demand cuando está activado.
+- src/experience/Core.tsx: icosaedro turquesa con rotación suave mediante useFrame y useRef, delta limitado y pausa con movimiento reducido. Ambos archivos comprobados el 20/11/2026.
+- src/experience/CameraRig.tsx: cámara con parallax suavizado mediante MathUtils.damp, conectada dentro de Canvas; implementación y pruebas confirmadas por el usuario.
+- Pendientes: estilos propios, shaders, navegación entre destinos, contenido real de proyectos y skills propias.
 
 ## Validación e incidencias resueltas
 - El usuario confirmó que la aplicación básica se veía en el navegador.
@@ -56,7 +59,9 @@ Archivos comprobados el 18/11/2026:
 - El aviso de TypeScript por falta de archivos desapareció al crear src/App.tsx.
 - El usuario aportó una compilación de producción correcta antes de añadir type: module.
 - Se añadió type: module para corregir el aviso de Vite sobre sintaxis ESM cargada como CommonJS. No se ha aportado una nueva salida de compilación posterior que confirme la desaparición del aviso.
-- No se ha realizado QA de una escena WebGL porque todavía no existe.
+- El usuario comprobó la escena WebGL, el giro, su pausa con movimiento reducido y su reanudación sin recargar. Estas pruebas fueron realizadas por el usuario, no por el asistente.
+- El usuario aportó compilaciones correctas de la escena y de la integración en main. El aviso ESM anterior no aparece en esas salidas.
+- Sigue pendiente optimizar el tamaño: Vite avisa de chunks superiores a 500 kB. La compilación termina correctamente; no se ha aplicado división de código.
 
 ## Dependencias: aviso pendiente
 - npm audit reportó cinco entradas de gravedad alta originadas por picomatch y propagadas a fdir, tinyglobby, Vite y su plugin React.
@@ -91,7 +96,7 @@ Archivos comprobados el 18/11/2026:
 ## Arquitectura acordada
 - Separar la interfaz HTML de la experiencia 3D.
 - Mantener el contenido y la navegación accesibles por teclado.
-- Prever alternativa sin WebGL y respetar movimiento reducido; pendientes de implementación.
+- Movimiento reducido implementado para el giro del núcleo y el desplazamiento de cámara por cursor. Mantenerlo en próximas animaciones. La alternativa sin WebGL sigue pendiente.
 - Construir primero un prototipo pequeño y funcional, después ampliar.
 - Evolución prevista: componentes de interfaz, experience para escena/cámara, data para destinos, hooks y shaders cuando sean necesarios. No crear abstracciones sin necesidad.
 
@@ -104,7 +109,7 @@ Archivos comprobados el 18/11/2026:
 - .gitignore excluye node_modules, dist, .vite, archivos .env (salvo .env.example), logs y archivos del sistema.
 - package-lock.json y .gitignore sí se versionan.
 - La consulta de git status del asistente el 18/11/2026 devolvió "this operation must be run in a work tree". Se pudieron leer remoto e historial. Causa no investigada: no afirmar que el árbol está limpio ni modificar la configuración de Git sin comprobarla.
-- Esta actualización de memoria no se ha confirmado mediante commit ni subido a GitHub.
+- Esta actualización del 20/11/2026 de MEMORY.MD está guardada localmente; no se ha creado un commit ni subido este cambio de documentación.
 
 ## AGENTS y skills
 - AGENTS.MD existe y contiene las reglas acordadas; se observaron barras invertidas antes de algunos marcadores Markdown. No se ha reformateado.
@@ -113,10 +118,9 @@ Archivos comprobados el 18/11/2026:
 - Crear una skill cuando exista una tarea concreta y repetible, explicando su utilidad antes de usarla.
 
 ## Próximo paso
-Cerrar la sesión guardando la escena estática: comprobar npm run build y git status, revisar cambios, crear commit y subirlo con el usuario. Al retomar, antes de modificar código, crear o seleccionar la rama feat/animated-core tras comprobar el estado del repositorio. Después conectar Core y respetar movimiento reducido.
-
+Guardar mediante commit y subir MEMORY.MD, Experience.tsx y CameraRig.tsx en feat/camera-parallax; el usuario ya aportó una compilación correcta y el estado de Git. Después revisar e integrar la rama antes de comenzar otra funcionalidad. Siguiente objetivo de desarrollo: definir dos destinos y preparar la transición de cámara entre ellos, coordinándola con el parallax para evitar que ambos controlen la posición de cámara a la vez.
 ## Fases siguientes propuestas
-1. Añadir movimiento ambiental y respuesta al cursor respetando movimiento reducido.
+1. Rotación del núcleo y respuesta de cámara al cursor implementadas y probadas por el usuario; la rama de cámara está pendiente de commit, subida e integración.
 2. Definir los datos de los destinos y animar cámara y enfoque entre dos puntos.
 3. Añadir menú, anterior/siguiente y contenido HTML accesible.
 4. Incorporar scroll, partículas y materiales más experimentales según el diseño elegido.
@@ -129,11 +133,26 @@ Cerrar la sesión guardando la escena estática: comprobar npm run build y git s
 - Orlune y Nexo se mencionaron en el contexto anterior, pero no hay materiales ni detalles verificados. No inventar sus características.
 - Idioma final del portfolio, diseño visual definitivo y destino de alojamiento.
 
-## Avance de la sesión y próxima rama
-- El usuario confirmó que la escena estática conectada a App se ve correctamente: fondo oscuro, icosaedro turquesa y luces.
-- Se proporcionó el código de src/experience/Core.tsx con useRef y useFrame para rotación; su creación no está confirmada.
-- Conectar Core dentro de Canvas y añadir soporte de movimiento reducido siguen pendientes.
-- El usuario pidió subir este avance a GitHub y continuar en la próxima sesión; faltan la salida de build, el estado de Git y la confirmación del commit/push.
-- Próxima funcionalidad: animación del núcleo, en la rama feat/animated-core. No se ha creado esa rama todavía.
-- La regla permanente de usar ramas para funcionalidades y correcciones queda registrada en AGENTS.MD.
-- Este avance actualiza la descripción inicial de App sin Canvas: esa descripción corresponde a la revisión anterior, no al estado comunicado posteriormente por el usuario.
+## Estado al cerrar la fase de animación (20/11/2026)
+- Escena estática guardada y subida en 6cdcf65: Add initial 3D scene and document branch workflow.
+- La animación se desarrolló en feat/animated-core, creada antes de modificar código.
+- Commit bd72820: Animate 3D core and respect reduced motion preference. El push de esa rama quedó confirmado por la salida de Git.
+- Se intentó crear una pull request: la integración devolvió 403 por falta de permisos y el navegador solicitó iniciar sesión. No se creó ninguna pull request mediante el asistente.
+- El usuario prefirió integrar localmente en main. Se le guió con switch main, pull --ff-only, merge de feat/animated-core, build y push.
+- El usuario aportó build correcto tras la integración y confirmó que el push a main terminó bien. Integración y subida registradas según esa confirmación; el asistente no consultó el remoto para revalidarlas.
+- El historial local leído el 20/11/2026 tiene bd72820 como último commit.
+- No se ha confirmado la eliminación de feat/animated-core; no asumir que esté borrada.
+- Las ramas siguen siendo la regla para nuevas funcionalidades. Una pull request es opcional trabajando solo; también se puede integrar localmente después de revisar y compilar.
+- Al cerrar esa fase se propuso feat/camera-parallax; su estado actual figura en la sección siguiente.
+
+## Cámara con parallax (20/11/2026)
+- Rama actual confirmada por la salida del usuario: feat/camera-parallax.
+- Implementada en src/experience/CameraRig.tsx y conectada dentro de Canvas en Experience.tsx.
+- Responde al cursor con desplazamiento suavizado mediante MathUtils.damp y delta limitado.
+- Mantiene el enfoque en el centro del objeto mediante lookAt.
+- Con movimiento reducido, deja de actualizar la cámara; no se ha implementado recentrado automático.
+- El usuario confirmó el funcionamiento en navegador, incluido el respeto a movimiento reducido.
+- npm run build terminó correctamente según la salida aportada por el usuario (279 ms).
+- Sigue pendiente optimizar el tamaño del bundle: aviso de chunks superiores a 500 kB.
+- Último git status aportado: MEMORY.MD y Experience.tsx modificados, CameraRig.tsx sin seguimiento.
+- Estos cambios todavía no tienen commit ni subida confirmados. La actualización de memoria se incluirá en esta rama, como pidió el usuario.

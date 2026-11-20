@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Core from './Core'
+import CameraRig from './CameraRig'
 
 export default function Experience() {
   const [reducedMotion, setReducedMotion] = useState(
@@ -35,6 +36,7 @@ export default function Experience() {
         <directionalLight position={[3, 4, 5]} intensity={3} />
 
         <Core reducedMotion={reducedMotion} />
+        <CameraRig reducedMotion={reducedMotion} />
       </Canvas>
     </div>
   )
