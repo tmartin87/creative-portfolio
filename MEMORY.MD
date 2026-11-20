@@ -91,7 +91,7 @@ Archivos comprobados el 18/11/2026:
 - Navegación inicial mediante botones anterior/siguiente y menú directo.
 - Incorporar scroll después de validar las transiciones.
 - Mostrar título, descripción y enlaces de cada destino mediante HTML.
-- React Three Fiber renderizará la escena; GSAP se propone para animar posición y enfoque de cámara. Todavía no está implementado.
+- React Three Fiber renderiza la escena y GSAP anima posición base y enfoque entre dos destinos provisionales; implementado en feat/camera-navigation, pendiente de integración en main.
 
 ## Arquitectura acordada
 - Separar la interfaz HTML de la experiencia 3D.
@@ -118,10 +118,10 @@ Archivos comprobados el 18/11/2026:
 - Crear una skill cuando exista una tarea concreta y repetible, explicando su utilidad antes de usarla.
 
 ## Próximo paso
-Guardar mediante commit y subir MEMORY.MD, Experience.tsx y CameraRig.tsx en feat/camera-parallax; el usuario ya aportó una compilación correcta y el estado de Git. Después revisar e integrar la rama antes de comenzar otra funcionalidad. Siguiente objetivo de desarrollo: definir dos destinos y preparar la transición de cámara entre ellos, coordinándola con el parallax para evitar que ambos controlen la posición de cámara a la vez.
+Crear un commit de MEMORY.MD y subirlo en feat/camera-navigation. Después integrar esa rama en main, comprobar la compilación y subir main siguiendo el flujo guiado con el usuario. No dar la integración por completada hasta recibir confirmación.
 ## Fases siguientes propuestas
-1. Rotación del núcleo y respuesta de cámara al cursor implementadas y probadas por el usuario; la rama de cámara está pendiente de commit, subida e integración.
-2. Definir los datos de los destinos y animar cámara y enfoque entre dos puntos.
+1. Rotación del núcleo y parallax implementados, probados e integrados en main según la confirmación del usuario.
+2. Datos de dos destinos y transiciones implementados y subidos en feat/camera-navigation; integrar en main tras guardar la memoria.
 3. Añadir menú, anterior/siguiente y contenido HTML accesible.
 4. Incorporar scroll, partículas y materiales más experimentales según el diseño elegido.
 5. Medir rendimiento en móvil, revisar accesibilidad, dependencias y alternativa sin WebGL.
@@ -156,3 +156,17 @@ Guardar mediante commit y subir MEMORY.MD, Experience.tsx y CameraRig.tsx en fea
 - Sigue pendiente optimizar el tamaño del bundle: aviso de chunks superiores a 500 kB.
 - Último git status aportado: MEMORY.MD y Experience.tsx modificados, CameraRig.tsx sin seguimiento.
 - Estos cambios todavía no tienen commit ni subida confirmados. La actualización de memoria se incluirá en esta rama, como pidió el usuario.
+
+## Navegación entre destinos
+- Implementada en feat/camera-navigation.
+- Commit 4879f99 subido a GitHub; confirmado por la salida de Git aportada por el usuario.
+- Dos destinos provisionales definidos en src/data/destinations.ts.
+- Botones HTML para viajar entre Inicio y Proyecto 01.
+- GSAP anima la posición base y el punto de enfoque.
+- El parallax se aplica por separado sobre la posición base.
+- Con movimiento reducido, el destino cambia inmediatamente.
+- Corregido el renderizado bajo demanda mediante invalidate().
+- El usuario confirmó la navegación y la corrección en modo reduce.
+- Compilación correcta (297 ms según la salida aportada); sigue pendiente optimizar el tamaño del bundle.
+- Pendiente guardar esta actualización de memoria en la misma rama e integrar feat/camera-navigation en main.
+- La fase anterior feat/camera-parallax ya fue subida e integrada en main, según la salida del push y la posterior confirmación del usuario.
