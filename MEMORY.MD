@@ -1,6 +1,6 @@
 # Memoria del proyecto
 
-Última actualización: 20 de noviembre de 2026.
+Última actualización: 23 de noviembre de 2026.
 
 ## Objetivo
 Crear un portfolio Creative Developer con estética Tech & Immersive y navegación WebGL experimental. El portfolio debe mostrar trabajo real y demostrar capacidades de desarrollo creativo y motion.
@@ -19,7 +19,8 @@ Crear un portfolio Creative Developer con estética Tech & Immersive y navegaci�
 - El asistente puede ejecutar acciones cuando el usuario lo pide explícitamente; no interpretar una petición puntual como autorización permanente.
 - Explicaciones en español. Se ha recomendado inglés para commits y documentación técnica; el idioma final de la web sigue pendiente.
 - Consultar AGENTS.MD para las reglas del proyecto y este archivo para su estado.
-- Actualizar esta memoria al terminar una fase; no guardar credenciales ni dar tareas no verificadas por completadas.
+- El usuario autoriza permanentemente al asistente a actualizar MEMORY.MD por su cuenta, sin pedirlo cada vez, al cerrar fases o registrar decisiones. Hacerlo antes del commit de cierre cuando sea posible. Esta autorización no incluye commits, subidas, merges ni cambios de código.
+- No guardar credenciales ni dar tareas no verificadas por completadas.
 
 ## Stack y configuración actuales
 Dependencias declaradas en package.json (rangos, no garantía de versión instalada):
@@ -51,7 +52,11 @@ Archivos comprobados el 18/11/2026:
 - src/experience/Experience.tsx: Canvas, fondo oscuro, luces y Core. Consulta prefers-reduced-motion y escucha sus cambios; utiliza frameloop demand cuando está activado.
 - src/experience/Core.tsx: icosaedro turquesa con rotación suave mediante useFrame y useRef, delta limitado y pausa con movimiento reducido. Ambos archivos comprobados el 20/11/2026.
 - src/experience/CameraRig.tsx: cámara con parallax suavizado mediante MathUtils.damp, conectada dentro de Canvas; implementación y pruebas confirmadas por el usuario.
-- Pendientes: estilos propios, shaders, navegación entre destinos, contenido real de proyectos y skills propias.
+- src/data/destinations.ts contiene dos destinos provisionales con título, descripción, posición de cámara y punto de enfoque.
+- Experience.tsx muestra título y descripción del destino activo en una sección HTML con aria-live polite y aria-atomic, además de botones de navegación y geometrías provisionales.
+- CameraRig combina transiciones GSAP y parallax, con invalidate para cambios inmediatos en movimiento reducido.
+- src/styles.css: estilos globales y composición inmersiva con escena de fondo e interfaz superpuesta. src/main.tsx importa ./styles.css. src/vite-env.d.ts declara los tipos vite/client.
+- Teclado, móvil y movimiento reducido validados por el usuario tras el cambio de composición. Pendientes: shaders, contenido real de proyectos y skills propias.
 
 ## Validación e incidencias resueltas
 - El usuario confirmó que la aplicación básica se veía en el navegador.
@@ -91,7 +96,7 @@ Archivos comprobados el 18/11/2026:
 - Navegación inicial mediante botones anterior/siguiente y menú directo.
 - Incorporar scroll después de validar las transiciones.
 - Mostrar título, descripción y enlaces de cada destino mediante HTML.
-- React Three Fiber renderiza la escena y GSAP anima posición base y enfoque entre dos destinos provisionales; implementado en feat/camera-navigation, pendiente de integración en main.
+- React Three Fiber renderiza la escena y GSAP anima posición base y enfoque entre dos destinos provisionales. Navegación y contenido HTML integrados en main y subidos según las confirmaciones del usuario.
 
 ## Arquitectura acordada
 - Separar la interfaz HTML de la experiencia 3D.
@@ -118,11 +123,11 @@ Archivos comprobados el 18/11/2026:
 - Crear una skill cuando exista una tarea concreta y repetible, explicando su utilidad antes de usarla.
 
 ## Próximo paso
-Crear un commit de MEMORY.MD y subirlo en feat/camera-navigation. Después integrar esa rama en main, comprobar la compilación y subir main siguiendo el flujo guiado con el usuario. No dar la integración por completada hasta recibir confirmación.
+Guardar AGENTS.MD, MEMORY.MD, src/App.tsx, src/experience/Experience.tsx, src/main.tsx, src/styles.css y src/vite-env.d.ts mediante commit en feat/immersive-layout y subir la rama. Compilación y pruebas de teclado, móvil y movimiento reducido completadas según las salidas y confirmación del usuario. Después guiar la integración en main. No afirmar que el commit, la subida o la integración están completados.
 ## Fases siguientes propuestas
 1. Rotación del núcleo y parallax implementados, probados e integrados en main según la confirmación del usuario.
-2. Datos de dos destinos y transiciones implementados y subidos en feat/camera-navigation; integrar en main tras guardar la memoria.
-3. Añadir menú, anterior/siguiente y contenido HTML accesible.
+2. Datos de dos destinos y transiciones implementados, probados e integrados en main según la confirmación del usuario.
+3. Título y descripción HTML dinámicos implementados; siguientes mejoras: composición visual, navegación anterior/siguiente y pruebas de accesibilidad.
 4. Incorporar scroll, partículas y materiales más experimentales según el diseño elegido.
 5. Medir rendimiento en móvil, revisar accesibilidad, dependencias y alternativa sin WebGL.
 6. Sustituir contenido provisional por proyectos reales y preparar despliegue.
@@ -146,7 +151,7 @@ Crear un commit de MEMORY.MD y subirlo en feat/camera-navigation. Después integ
 - Al cerrar esa fase se propuso feat/camera-parallax; su estado actual figura en la sección siguiente.
 
 ## Cámara con parallax (20/11/2026)
-- Rama actual confirmada por la salida del usuario: feat/camera-parallax.
+- Rama utilizada para esta fase: feat/camera-parallax; ya integrada en main según la confirmación posterior del usuario.
 - Implementada en src/experience/CameraRig.tsx y conectada dentro de Canvas en Experience.tsx.
 - Responde al cursor con desplazamiento suavizado mediante MathUtils.damp y delta limitado.
 - Mantiene el enfoque en el centro del objeto mediante lookAt.
@@ -155,7 +160,7 @@ Crear un commit de MEMORY.MD y subirlo en feat/camera-navigation. Después integ
 - npm run build terminó correctamente según la salida aportada por el usuario (279 ms).
 - Sigue pendiente optimizar el tamaño del bundle: aviso de chunks superiores a 500 kB.
 - Último git status aportado: MEMORY.MD y Experience.tsx modificados, CameraRig.tsx sin seguimiento.
-- Estos cambios todavía no tienen commit ni subida confirmados. La actualización de memoria se incluirá en esta rama, como pidió el usuario.
+- El usuario aportó el push correcto de feat/camera-parallax y confirmó después la integración y subida de main.
 
 ## Navegación entre destinos
 - Implementada en feat/camera-navigation.
@@ -168,5 +173,36 @@ Crear un commit de MEMORY.MD y subirlo en feat/camera-navigation. Después integ
 - Corregido el renderizado bajo demanda mediante invalidate().
 - El usuario confirmó la navegación y la corrección en modo reduce.
 - Compilación correcta (297 ms según la salida aportada); sigue pendiente optimizar el tamaño del bundle.
-- Pendiente guardar esta actualización de memoria en la misma rama e integrar feat/camera-navigation en main.
+- El usuario confirmó el commit y push de la memoria y, posteriormente, la integración, compilación y subida a main. No se aportó el hash del commit de documentación.
 - La fase anterior feat/camera-parallax ya fue subida e integrada en main, según la salida del push y la posterior confirmación del usuario.
+
+## Contenido HTML por destino
+- Desarrollado en feat/destination-content.
+- Se añadió description al tipo Destination y a los dos destinos.
+- Textos provisionales: presentación Creative Developer y espacio reservado para Proyecto 01; no son casos de estudio reales.
+- Experience muestra título y descripción del destino seleccionado fuera del Canvas mediante aria-live polite y aria-atomic.
+- El contenido cambia al pulsar el botón, al inicio del viaje; no está sincronizado con la llegada de cámara.
+- El usuario confirmó el cambio de textos en navegador y aportó build correcto (342 ms).
+- El usuario confirmó commit y subida de la rama y, después, integración, build y push de main. No se aportaron hashes ni salidas finales de esas operaciones.
+- La composición visual se ha implementado posteriormente en feat/immersive-layout; estado detallado en su sección.
+
+## Preferencia permanente sobre la memoria
+- El usuario pidió: actualizar MEMORY siempre por cuenta del asistente.
+- Regla guardada en AGENTS.MD; ya no pedir al usuario que edite la memoria ni solicitar confirmación conversacional para cada actualización.
+- Mantener separada esta autorización de las acciones de Git y de los cambios de código.
+
+## Composición inmersiva (23/11/2026)
+- Rama actual confirmada por git status aportado: feat/immersive-layout.
+- Se eligió CSS normal frente a Tailwind para controlar y aprender composición, capas y estilos sin añadir otra herramienta.
+- src/styles.css contiene base oscura, foco visible, tipografía adaptable y botones con estado activo turquesa.
+- Experience separa la escena (experience__scene) de la interfaz HTML (experience__interface), con Canvas de fondo y textos/botones superpuestos.
+- La interfaz usa pointer-events none y la navegación auto para conservar interacción con la escena y con los botones.
+- App se simplificó para mostrar Experience, evitando la presentación duplicada.
+- Se añadió src/vite-env.d.ts con la referencia vite/client. El usuario confirmó que desapareció el error de tipos de la importación CSS.
+- Después se corrigió un error de ruta real: .styles.css se sustituyó por ./styles.css en main.tsx; el usuario confirmó que funcionó.
+- El usuario confirmó que el texto se lee bien.
+- Compilación correcta aportada: 318 ms; CSS 1.18 kB y JavaScript 1212.40 kB minificados (339.55 kB gzip). Sigue el aviso de chunks superiores a 500 kB; no se ha optimizado todavía.
+- El usuario confirmó las tres pruebas del layout: navegación con Tab/Enter, ancho móvil sin recortes ni desplazamiento horizontal y cambio de destino sin animación con movimiento reducido.
+- Archivos pendientes según git status: AGENTS.MD, MEMORY.MD, App.tsx, Experience.tsx y main.tsx modificados; styles.css y vite-env.d.ts sin seguimiento.
+- Esta fase aún no tiene commit, subida ni integración confirmados. Incluir las reglas de memoria de AGENTS.MD y esta actualización en el commit de cierre.
+

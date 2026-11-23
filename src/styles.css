@@ -1,0 +1,88 @@
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #edf2f7;
+  background: #080b12;
+  color-scheme: dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #65e8dc;
+  outline-offset: 6px;
+}
+
+::selection {
+  color: #080b12;
+  background: #65e8dc;
+}
+
+.experience {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  isolation: isolate;
+}
+
+.experience > canvas {
+  display: block;
+}
+
+.experience__interface h2 {
+  margin: 0;
+  max-width: 10ch;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.experience__interface p {
+  max-width: 38ch;
+  margin: 24px 0 0;
+  color: #b5bfce;
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.6;
+}
+
+.experience__interface button {
+  padding: 12px 20px;
+  border: 1px solid #465263;
+  border-radius: 999px;
+  background: #080b12;
+  color: #b5bfce;
+  cursor: pointer;
+}
+
+.experience__interface button:hover {
+  border-color: #65e8dc;
+  color: #edf2f7;
+}
+
+.experience__interface button[aria-pressed='true'] {
+  border-color: #65e8dc;
+  background: #65e8dc;
+  color: #080b12;
+}
