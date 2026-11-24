@@ -1,6 +1,6 @@
 # Memoria del proyecto
 
-Última actualización: 23 de noviembre de 2026.
+Última actualización: 24 de noviembre de 2026.
 
 ## Objetivo
 Crear un portfolio Creative Developer con estética Tech & Immersive y navegación WebGL experimental. El portfolio debe mostrar trabajo real y demostrar capacidades de desarrollo creativo y motion.
@@ -123,7 +123,7 @@ Archivos comprobados el 18/11/2026:
 - Crear una skill cuando exista una tarea concreta y repetible, explicando su utilidad antes de usarla.
 
 ## Próximo paso
-Guardar AGENTS.MD, MEMORY.MD, src/App.tsx, src/experience/Experience.tsx, src/main.tsx, src/styles.css y src/vite-env.d.ts mediante commit en feat/immersive-layout y subir la rama. Compilación y pruebas de teclado, móvil y movimiento reducido completadas según las salidas y confirmación del usuario. Después guiar la integración en main. No afirmar que el commit, la subida o la integración están completados.
+Guardar MEMORY.MD, src/experience/Experience.tsx y src/experience/SpatialGrid.tsx mediante commit en feat/spatial-grid y subir la rama. Compilación correcta y comprobación visual confirmadas por el usuario. Después guiar la integración en main. No dar commit, subida ni integración por completados hasta recibir sus resultados.
 ## Fases siguientes propuestas
 1. Rotación del núcleo y parallax implementados, probados e integrados en main según la confirmación del usuario.
 2. Datos de dos destinos y transiciones implementados, probados e integrados en main según la confirmación del usuario.
@@ -204,5 +204,17 @@ Guardar AGENTS.MD, MEMORY.MD, src/App.tsx, src/experience/Experience.tsx, src/ma
 - Compilación correcta aportada: 318 ms; CSS 1.18 kB y JavaScript 1212.40 kB minificados (339.55 kB gzip). Sigue el aviso de chunks superiores a 500 kB; no se ha optimizado todavía.
 - El usuario confirmó las tres pruebas del layout: navegación con Tab/Enter, ancho móvil sin recortes ni desplazamiento horizontal y cambio de destino sin animación con movimiento reducido.
 - Archivos pendientes según git status: AGENTS.MD, MEMORY.MD, App.tsx, Experience.tsx y main.tsx modificados; styles.css y vite-env.d.ts sin seguimiento.
-- Esta fase aún no tiene commit, subida ni integración confirmados. Incluir las reglas de memoria de AGENTS.MD y esta actualización en el commit de cierre.
+- Fase guardada en el commit 6ec71ed: Add immersive fullscreen layout and styled destination interface. Incluye AGENTS.MD y MEMORY.MD. Rama subida e integrada en main; el push aportado confirmó main de 1576382 a 6ec71ed. Build de integración correcto (280 ms).
 
+
+
+## Cuadrícula espacial (24/11/2026)
+- Rama actual confirmada por el git status aportado: feat/spatial-grid.
+- Creado src/experience/SpatialGrid.tsx con gridHelper de 40 unidades y 40 divisiones, colores #285b60 y #172b38, posición [2, -2, 0].
+- SpatialGrid importado y conectado dentro de Canvas en Experience.tsx.
+- Añadida niebla del color de fondo #080b12 con distancias 8 y 25 para fundir la cuadrícula lejana.
+- El usuario confirmó que la cuadrícula y la niebla se ven correctamente y que ambas geometrías siguen claras al navegar.
+- npm run build correcto según la salida aportada: 289 ms; 37 módulos, JavaScript 1212.57 kB minificados y 339.63 kB gzip.
+- Sigue pendiente optimizar el tamaño del bundle; el aviso de chunks superiores a 500 kB no impidió la compilación.
+- Archivos pendientes según git status: MEMORY.MD y Experience.tsx modificados, SpatialGrid.tsx sin seguimiento.
+- Actualización de memoria guardada antes del commit de cierre. Commit, subida e integración de esta fase todavía pendientes.
