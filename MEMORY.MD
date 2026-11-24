@@ -123,7 +123,7 @@ Archivos comprobados el 18/11/2026:
 - Crear una skill cuando exista una tarea concreta y repetible, explicando su utilidad antes de usarla.
 
 ## Próximo paso
-Guardar MEMORY.MD, src/experience/Experience.tsx y src/experience/Particles.tsx mediante commit en feat/ambient-particles y subir la rama. El usuario confirmó las pruebas visuales y que npm run build pasa. Después guiar la integración en main. No dar commit, subida ni integración por completados hasta recibir confirmación.
+Guardar MEMORY.MD, src/experience/Core.tsx y src/experience/Experience.tsx mediante commit en feat/holographic-core y subir la rama. La compilación y la pausa con movimiento reducido están confirmadas. Después guiar la integración en main. Esta primera versión visual utiliza materiales estándar de Three.js; un shader holográfico personalizado sigue siendo una posible fase posterior, no implementada.
 ## Fases siguientes propuestas
 1. Rotación del núcleo y parallax implementados, probados e integrados en main según la confirmación del usuario.
 2. Datos de dos destinos y transiciones implementados, probados e integrados en main según la confirmación del usuario.
@@ -230,4 +230,18 @@ Guardar MEMORY.MD, src/experience/Experience.tsx y src/experience/Particles.tsx 
 - El usuario confirmó visibilidad, movimiento, pausa/reanudación y presencia de partículas entre ambos destinos.
 - El usuario confirmó que npm run build pasa; no aportó la salida completa de esta compilación ni métricas nuevas.
 - Último git status: MEMORY.MD y Experience.tsx modificados, Particles.tsx sin seguimiento.
-- Memoria actualizada antes del commit. Commit, subida e integración de esta fase pendientes.
+- Commit 963a70b: Add ambient particles with reduced motion support. Rama subida e integrada en main. El usuario aportó build correcto (276 ms) y push de main confirmado de f38dcdf a 963a70b. JavaScript: 1213.18 kB minificados y 339.85 kB gzip; el aviso de tamaño sigue pendiente.
+
+
+## Núcleo holográfico inicial (24/11/2026)
+- Rama confirmada por git status del usuario: feat/holographic-core.
+- Core.tsx agrupa dos icosaedros para conservar la rotación conjunta: líneas exteriores turquesas y superficie interior tenue a escala 0.96.
+- Material exterior meshBasicMaterial wireframe transparente con opacidad 0.65, depthWrite false y AdditiveBlending.
+- Material interior meshBasicMaterial #163b45, transparente, opacidad 0.3 y depthWrite false.
+- La referencia del objeto animado cambió de Mesh a Group. La rotación y su pausa por movimiento reducido se conservan.
+- El usuario confirmó aspecto correcto y que la figura se detiene con movimiento reducido.
+- Se corrigió una edición inicial en la geometría equivocada: el nudo de Proyecto 01 conserva su material violeta.
+- El diff de Experience.tsx aportado muestra solo comillas, puntos y coma e indentación; no cambios funcionales respecto a la versión anterior.
+- Build correcto aportado: 290 ms, JavaScript 1213.42 kB minificados y 339.89 kB gzip. Persiste el aviso de tamaño.
+- Es una aproximación visual con capas y mezcla aditiva, sin shader personalizado ni halo de postprocesado.
+- Pendientes según el git status aportado: MEMORY.MD, Core.tsx y Experience.tsx. Commit, subida e integración de esta fase no confirmados.

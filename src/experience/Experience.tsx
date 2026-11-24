@@ -1,34 +1,34 @@
-import { useEffect, useState } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { destinations } from '../data/destinations'
-import Core from './Core'
-import CameraRig from './CameraRig'
-import SpatialGrid from './SpatialGrid'
-import Particles from './Particles'
+import { useEffect, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { destinations } from "../data/destinations";
+import Core from "./Core";
+import CameraRig from "./CameraRig";
+import SpatialGrid from "./SpatialGrid";
+import Particles from "./Particles";
 
 export default function Experience() {
-  const [destinationIndex, setDestinationIndex] = useState(0)
+  const [destinationIndex, setDestinationIndex] = useState(0);
 
   const [reducedMotion, setReducedMotion] = useState(
-    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-  )
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
-  const activeDestination = destinations[destinationIndex]
+  const activeDestination = destinations[destinationIndex];
 
   useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function updatePreference() {
-      setReducedMotion(media.matches)
+      setReducedMotion(media.matches);
     }
 
-    updatePreference()
-    media.addEventListener('change', updatePreference)
+    updatePreference();
+    media.addEventListener("change", updatePreference);
 
     return () => {
-      media.removeEventListener('change', updatePreference)
-    }
-  }, [])
+      media.removeEventListener("change", updatePreference);
+    };
+  }, []);
 
   return (
     <div className="experience">
@@ -36,15 +36,15 @@ export default function Experience() {
         <Canvas
           camera={{ position: [0, 0, 5], fov: 45 }}
           dpr={[1, 1.5]}
-          frameloop={reducedMotion ? 'demand' : 'always'}
+          frameloop={reducedMotion ? "demand" : "always"}
         >
-          <color attach="background" args={['#080b12']} />
-          <fog attach="fog" args={['#080b12', 8, 25]} />
+          <color attach="background" args={["#080b12"]} />
+          <fog attach="fog" args={["#080b12", 8, 25]} />
 
           <ambientLight intensity={0.5} />
           <directionalLight position={[3, 4, 5]} intensity={3} />
           <SpatialGrid />
-        <Particles reducedMotion={reducedMotion} />
+          <Particles reducedMotion={reducedMotion} />
 
           <Core reducedMotion={reducedMotion} />
 
@@ -84,5 +84,5 @@ export default function Experience() {
         </nav>
       </div>
     </div>
-  )
+  );
 }
