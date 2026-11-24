@@ -4,6 +4,7 @@ import { destinations } from '../data/destinations'
 import Core from './Core'
 import CameraRig from './CameraRig'
 import SpatialGrid from './SpatialGrid'
+import Particles from './Particles'
 
 export default function Experience() {
   const [destinationIndex, setDestinationIndex] = useState(0)
@@ -43,6 +44,7 @@ export default function Experience() {
           <ambientLight intensity={0.5} />
           <directionalLight position={[3, 4, 5]} intensity={3} />
           <SpatialGrid />
+        <Particles reducedMotion={reducedMotion} />
 
           <Core reducedMotion={reducedMotion} />
 

@@ -123,7 +123,7 @@ Archivos comprobados el 18/11/2026:
 - Crear una skill cuando exista una tarea concreta y repetible, explicando su utilidad antes de usarla.
 
 ## Próximo paso
-Guardar MEMORY.MD, src/experience/Experience.tsx y src/experience/SpatialGrid.tsx mediante commit en feat/spatial-grid y subir la rama. Compilación correcta y comprobación visual confirmadas por el usuario. Después guiar la integración en main. No dar commit, subida ni integración por completados hasta recibir sus resultados.
+Guardar MEMORY.MD, src/experience/Experience.tsx y src/experience/Particles.tsx mediante commit en feat/ambient-particles y subir la rama. El usuario confirmó las pruebas visuales y que npm run build pasa. Después guiar la integración en main. No dar commit, subida ni integración por completados hasta recibir confirmación.
 ## Fases siguientes propuestas
 1. Rotación del núcleo y parallax implementados, probados e integrados en main según la confirmación del usuario.
 2. Datos de dos destinos y transiciones implementados, probados e integrados en main según la confirmación del usuario.
@@ -217,4 +217,17 @@ Guardar MEMORY.MD, src/experience/Experience.tsx y src/experience/SpatialGrid.ts
 - npm run build correcto según la salida aportada: 289 ms; 37 módulos, JavaScript 1212.57 kB minificados y 339.63 kB gzip.
 - Sigue pendiente optimizar el tamaño del bundle; el aviso de chunks superiores a 500 kB no impidió la compilación.
 - Archivos pendientes según git status: MEMORY.MD y Experience.tsx modificados, SpatialGrid.tsx sin seguimiento.
-- Actualización de memoria guardada antes del commit de cierre. Commit, subida e integración de esta fase todavía pendientes.
+- Commit f38dcdf: Add spatial grid and atmospheric fog. Rama feat/spatial-grid subida e integrada en main. El usuario aportó build de integración correcto (300 ms) y push de main confirmado de 6ec71ed a f38dcdf.
+
+
+## Partículas ambientales (24/11/2026)
+- Rama actual confirmada por git status aportado: feat/ambient-particles.
+- Creado src/experience/Particles.tsx con 180 puntos y posiciones generadas una vez por montaje mediante useState y Float32Array.
+- Renderizado mediante points y bufferGeometry; material #8abfc8, tamaño 0.035, opacidad 0.6, sizeAttenuation y depthWrite false.
+- Añadido a Canvas en Experience.tsx con reducedMotion como propiedad.
+- Rotación ambiental mediante useFrame y useRef, delta limitado y velocidad 0.015 radianes por segundo.
+- El movimiento se detiene con reducedMotion y se reanuda cuando deja de estar activo.
+- El usuario confirmó visibilidad, movimiento, pausa/reanudación y presencia de partículas entre ambos destinos.
+- El usuario confirmó que npm run build pasa; no aportó la salida completa de esta compilación ni métricas nuevas.
+- Último git status: MEMORY.MD y Experience.tsx modificados, Particles.tsx sin seguimiento.
+- Memoria actualizada antes del commit. Commit, subida e integración de esta fase pendientes.
