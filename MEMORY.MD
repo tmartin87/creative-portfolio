@@ -1,6 +1,6 @@
 # Memoria del proyecto
 
-Última actualización: 24 de noviembre de 2026.
+Última actualización: 27 de noviembre de 2026.
 
 ## Objetivo
 Crear un portfolio Creative Developer con estética Tech & Immersive y navegación WebGL experimental. El portfolio debe mostrar trabajo real y demostrar capacidades de desarrollo creativo y motion.
@@ -123,7 +123,7 @@ Archivos comprobados el 18/11/2026:
 - Crear una skill cuando exista una tarea concreta y repetible, explicando su utilidad antes de usarla.
 
 ## Próximo paso
-Guardar MEMORY.MD, src/experience/Core.tsx y src/experience/Experience.tsx mediante commit en feat/holographic-core y subir la rama. La compilación y la pausa con movimiento reducido están confirmadas. Después guiar la integración en main. Esta primera versión visual utiliza materiales estándar de Three.js; un shader holográfico personalizado sigue siendo una posible fase posterior, no implementada.
+Revisar git status en feat/holographic-shader y guardar Core.tsx, src/shaders/holographic.ts y MEMORY.MD mediante commit; subir la rama y después guiar su integración en main. Shader y movimiento reducido validados por el usuario; build confirmado por el usuario, sin salida completa nueva. No dar commit, subida o integración de esta fase por completados.
 ## Fases siguientes propuestas
 1. Rotación del núcleo y parallax implementados, probados e integrados en main según la confirmación del usuario.
 2. Datos de dos destinos y transiciones implementados, probados e integrados en main según la confirmación del usuario.
@@ -244,4 +244,18 @@ Guardar MEMORY.MD, src/experience/Core.tsx y src/experience/Experience.tsx media
 - El diff de Experience.tsx aportado muestra solo comillas, puntos y coma e indentación; no cambios funcionales respecto a la versión anterior.
 - Build correcto aportado: 290 ms, JavaScript 1213.42 kB minificados y 339.89 kB gzip. Persiste el aviso de tamaño.
 - Es una aproximación visual con capas y mezcla aditiva, sin shader personalizado ni halo de postprocesado.
-- Pendientes según el git status aportado: MEMORY.MD, Core.tsx y Experience.tsx. Commit, subida e integración de esta fase no confirmados.
+- El usuario confirmó el cierre completo: commit y subida de feat/holographic-core, integración en main, compilación y push de main correctos. No se aportaron hash ni salidas finales; estado registrado según su confirmación.
+
+
+## Shader holográfico (27/11/2026)
+- Rama comprobada por el asistente: feat/holographic-shader.
+- src/shaders/holographic.ts exporta vertex y fragment shader GLSL.
+- Vertex shader transmite posición y normal en espacio de vista y altura local.
+- Fragment shader combina brillo de contorno y bandas de escaneo mediante uColor y uTime, con conversión de color y tone mapping.
+- Core.tsx mantiene líneas exteriores y sustituye el material interior por shaderMaterial transparente y aditivo.
+- Uniforms conservados con useState; uTime avanza con delta limitado y se pausa junto al giro cuando reducedMotion está activo.
+- Corregido TS2307: el archivo se llamaba holograpic.ts; renombrado a holographic.ts. El asistente comprobó la ruta y leyó el archivo correcto.
+- El usuario confirmó build correcto y pruebas en navegador: bandas visibles, pausa de bandas y giro con reduce, reanudación con no-preference.
+- No se aportaron nuevas métricas de build. La validación visual fue realizada por el usuario, no por el asistente.
+- Este shader inicial no incorpora los chunks de niebla; comprobar su integración visual con la niebla antes de ampliar distancias o destinos.
+- Commit, subida e integración de esta fase pendientes. Memoria actualizada antes del cierre.

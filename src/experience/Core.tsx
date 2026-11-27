@@ -1,20 +1,31 @@
-import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
-import type { Group } from "three";
-import { AdditiveBlending } from "three";
-
+import { useRef, useState } from 'react'
+import { useFrame } from '@react-three/fiber'
+import { AdditiveBlending, Color } from 'three'
+import type { Group } from 'three'
+import {
+  holographicVertexShader,
+  holographicFragmentShader,
+} from '../shaders/holographic'
 type CoreProps = {
-  reducedMotion: boolean;
-};
+  reducedMotion: boolean
+}
 
 export default function Core({ reducedMotion }: CoreProps) {
-  const meshRef = useRef<Group>(null);
+  const meshRef = useRef<Group>(null)
+
+  const [uniforms] = useState(() => ({
+    uColor: { value: new Color('#65e8dc') },
+    uTime: { value: 0 },
+  }))
 
   useFrame((_, delta) => {
-    if (reducedMotion || !meshRef.current) return;
+    if (reducedMotion || !meshRef.current) return
 
-    meshRef.current.rotation.y += Math.min(delta, 0.1) * 0.2;
-  });
+    const safeDelta = Math.min(delta, 0.1)
+
+    meshRef.current.rotation.y += safeDelta * 0.2
+    uniforms.uTime.value += safeDelta
+  })
 
   return (
     <group ref={meshRef} rotation={[0.4, 0.6, 0]}>
@@ -34,13 +45,15 @@ export default function Core({ reducedMotion }: CoreProps) {
       <mesh scale={0.96}>
         <icosahedronGeometry args={[1.4, 0]} />
 
-        <meshBasicMaterial
-          color="#163b45"
+        <shaderMaterial
+          vertexShader={holographicVertexShader}
+          fragmentShader={holographicFragmentShader}
+          uniforms={uniforms}
           transparent
-          opacity={0.3}
           depthWrite={false}
+          blending={AdditiveBlending}
         />
       </mesh>
     </group>
-  );
+  )
 }
